@@ -14,6 +14,6 @@ docker run \
     --env-file=.env \
     --volume=$PWD:/workspace \
     --volume=$PWD/../data:/data \
-    todo:ai \
+    todo:cloud \
     /bin/bash -c "echo 'Vue.js 3開発環境が起動しました'; tail -f /dev/null"
 
