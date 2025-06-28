@@ -327,13 +327,21 @@
                     this.$refs.form.resetValidation();
                 },
                 saveTodos() {
-                    localStorage.setItem('todos', JSON.stringify(this.todos));
+                    const storageKey = this.getStorageKey();
+                    localStorage.setItem(storageKey, JSON.stringify(this.todos));
                 },
                 loadTodos() {
-                    const saved = localStorage.getItem('todos');
+                    const storageKey = this.getStorageKey();
+                    const saved = localStorage.getItem(storageKey);
                     if (saved) {
                         this.todos = JSON.parse(saved);
                     }
+                },
+                getStorageKey() {
+                    // アプリの一意なキーを生成（現在のページのパスベース）
+                    const currentPath = window.location.pathname;
+                    const appId = 'vuetify-todo-app';
+                    return `${appId}-${btoa(currentPath).replace(/[^a-zA-Z0-9]/g, '')}`;
                 },
                 formatDate(dateString) {
                     if (!dateString) return '';
